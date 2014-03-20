@@ -61,6 +61,15 @@ namespace TransportWaker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string AppBarAbout {
+            get {
+                return ResourceManager.GetString("AppBarAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add.
         /// </summary>
         public static string AppBarButtonText {
@@ -88,6 +97,15 @@ namespace TransportWaker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find Route For Alarm.
+        /// </summary>
+        public static string CreateAlarm {
+            get {
+                return ResourceManager.GetString("CreateAlarm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
@@ -111,6 +129,15 @@ namespace TransportWaker.Resources {
         public static string SampleProperty {
             get {
                 return ResourceManager.GetString("SampleProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saved Routes.
+        /// </summary>
+        public static string Saved {
+            get {
+                return ResourceManager.GetString("Saved", resourceCulture);
             }
         }
         

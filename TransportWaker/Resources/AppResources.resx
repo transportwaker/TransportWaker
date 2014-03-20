@@ -140,4 +140,13 @@
   <data name="StartPage" xml:space="preserve">
     <value>Start</value>
   </data>
+  <data name="AppBarAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="CreateAlarm" xml:space="preserve">
+    <value>Find Route For Alarm</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Saved Routes</value>
+  </data>
 </root>
