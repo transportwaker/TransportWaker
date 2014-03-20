@@ -128,7 +128,6 @@
     </DesignData>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CoffeeScript1.coffee" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
