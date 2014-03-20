@@ -13,12 +13,6 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-
-    <phone:PhoneApplicationPage.Resources>
-        <DataTemplate x:Key="StartNavTemplate">
-        </DataTemplate>
-    </phone:PhoneApplicationPage.Resources>
-    
     
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -40,19 +34,29 @@
                        Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <!--ContentPanel contains LongListSelector and LongListSelector ItemTemplate. Place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector x:Name="MainLongListSelector" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="MainLongListSelector_SelectionChanged">
-                <phone:LongListSelector.ItemTemplate>
-                    <DataTemplate>
-                      <StackPanel Margin="0,0,0,17">
-                          <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                          <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                      </StackPanel>
-                    </DataTemplate>
-                </phone:LongListSelector.ItemTemplate>
-            </phone:LongListSelector>
+        <!-- Check how to format the textblocks for height -->
+        
+         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,0,14,0">
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       TextWrapping="Wrap"   
+                       Height="100"
+                       Width="{Binding ElementName=ContentPanel, Path=ActualWidth}"
+                       Text ="{Binding Path=LocalizedResources.CreateAlarm,
+                                        Source={StaticResource LocalizedStrings}}"
+                       Style="{StaticResource PhoneTextExtraLargeStyle}" Margin="0,-5,0,0"/>
+                      
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       TextWrapping="Wrap"   
+                       Height="100"
+                       Width="{Binding ElementName=ContentPanel, Path=ActualWidth}"
+                       Text ="{Binding Path=LocalizedResources.Saved,
+                                        Source={StaticResource LocalizedStrings}}"
+                       Style="{StaticResource PhoneTextExtraLargeStyle}" 
+                       Margin="0,95,0,0"/>
         </Grid>
+        
 
     </Grid>
 
