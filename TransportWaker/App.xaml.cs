@@ -7,7 +7,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TransportWaker.Resources;
-using TransportWaker.ViewModels;
+using TransportWaker.ViewModel;
 
 namespace TransportWaker
 {

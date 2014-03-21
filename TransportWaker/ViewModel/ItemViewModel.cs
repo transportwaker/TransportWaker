@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace TransportWaker.ViewModels
+namespace TransportWaker.ViewModel
 {
     public class ItemViewModel : INotifyPropertyChanged
     {

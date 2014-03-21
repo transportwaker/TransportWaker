@@ -8,9 +8,10 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TransportWaker.Resources;
-using TransportWaker.ViewModels;
+using TransportWaker.ViewModel;
+using TransportWaker.View;
 
-namespace TransportWaker
+namespace TransportWaker.View
 {
     public partial class MainPage : PhoneApplicationPage
     {
@@ -64,6 +65,11 @@ namespace TransportWaker
 
         private void aboutAppBar_Click(object sender, EventArgs e)
         {
+        }
+
+        private void Tap_SavedRoute(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SavedRoutes.xaml", UriKind.Relative));
         }
     }
 }
