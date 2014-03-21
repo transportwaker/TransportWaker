@@ -30,9 +30,12 @@ public class FeedParser
 {
 	public static void Main()
 	{
-		int route = 300;
+		int route = 501;
 		Dictionary<string, string> response = findClosestStop(new GeoPoint(43.659374, -79.382545), route);
 		Console.WriteLine("The nearest bus stop on Route {0} is {1}. It is {2} away.", route, response["name"], response["distance"]);
+		Console.WriteLine("tag={0} stopId={1}", response["tag"], response["stopId"]);
+		List<string> directions = getDirectionNames(501);
+		Console.WriteLine(directions[0]);
 		Console.ReadLine();
 	}
 
@@ -43,11 +46,11 @@ public class FeedParser
 		xml.LoadXml(client.DownloadString("http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=ttc&r=" + route));
 		XmlNode parent = xml.FirstChild;
 		XmlNodeList stops = xml.GetElementsByTagName("stop");
+		Dictionary<string, string> response = new Dictionary<string, string>();
 
 		if (stops.Count == 0)
 		{
-			Dictionary<string, string> response = new Dictionary<string, string>();
-			response.Add("Error", "Invalid Route");
+			response.Add("error", "Invalid Route");
 			return response;
 		}
 
@@ -67,7 +70,6 @@ public class FeedParser
 			}
 		}
 
-		Dictionary<string, string> response = new Dictionary<string, string>();
 		response.Add("tag", bestStop.Attributes["tag"].Value);
 		response.Add("name", bestStop.Attributes["title"].Value);
 		response.Add("stopId", bestStop.Attributes["stopId"].Value);
@@ -82,9 +84,42 @@ public class FeedParser
 		return response;
 	}
 
-	public static Dictionary<string, string> getSleepTime(int route, int from, int to)
+	public static Dictionary<string, string> getNextBus(int route, int stop, string direction)
 	{
+		WebClient client = new WebClient();
+		XmlDocument xml = new XmlDocument();
+		xml.LoadXml(client.DownloadString("http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&r=" + route + "&stopId=" + stop));
+		XmlNode parent = xml.FirstChild;
+		XmlNodeList predictions = xml.GetElementsByTagName("prediction");
 		Dictionary<string, string> response = new Dictionary<string, string>();
+
+		for (int i = 0; i < predictions.Count; i++)
+		{
+			if (predictions[i].ParentNode.Name == direction)
+			{
+				response.Add("time", predictions[i].Attributes["seconds"].Value);
+				response.Add("vehicle", predictions[i].Attributes["vehicle"].Value);
+				return response;
+			}
+		}
+
+		response.Add("error", "No predictions available in that direction");
+		return response;
+	}
+
+	public static List<string> getDirectionNames(int route)
+	{
+		WebClient client = new WebClient();
+		XmlDocument xml = new XmlDocument();
+		xml.LoadXml(client.DownloadString("http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=ttc&r=" + route));
+		XmlNode parent = xml.FirstChild;
+		XmlNodeList directions = xml.GetElementsByTagName("direction");
+		List<string> response = new List<string>();
+
+		for (int i = 0; i < directions.Count; i++)
+		{
+			response.Add(directions[i].Attributes["title"].Value);
+		}
 		return response;
 	}
 }
