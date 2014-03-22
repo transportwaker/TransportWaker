@@ -10,9 +10,9 @@ using Microsoft.Phone.Shell;
 
 namespace TransportWaker.View
 {
-    public partial class SavedRoutes : PhoneApplicationPage
+    public partial class RouteHistory : PhoneApplicationPage
     {
-        public SavedRoutes()
+        public RouteHistory()
         {
             InitializeComponent();
         }

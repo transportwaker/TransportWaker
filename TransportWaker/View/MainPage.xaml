@@ -8,7 +8,7 @@
     xmlns:UI="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
     x:Class="TransportWaker.View.MainPage"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -33,7 +33,7 @@
         </StackPanel>
 
         <!--Content Navigator-->
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="24,0,0,0">
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="24,0,24,0">
             <TextBlock
                 HorizontalAlignment="Left"
 				VerticalAlignment="Top"
