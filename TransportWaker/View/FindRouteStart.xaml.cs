@@ -29,11 +29,11 @@ namespace TransportWaker.View
         {
             SystemTray.ProgressIndicator = new ProgressIndicator();
 
-            UpdateMap();
+            GetUserLoc();
 
         }
 
-        private async void UpdateMap()
+        private async void GetUserLoc()
         {
             Geolocator geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 10;
@@ -46,7 +46,7 @@ namespace TransportWaker.View
                 Geoposition position =
                     await geolocator.GetGeopositionAsync(
                     TimeSpan.FromMinutes(1),
-                    TimeSpan.FromSeconds(30));
+                    TimeSpan.FromSeconds(10));
 
                 SystemTray.ProgressIndicator.Text = "Acquired";
 

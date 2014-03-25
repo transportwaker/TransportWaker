@@ -38,7 +38,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
 			Grid.Row="1">
-            <maps:Map Name="StartMap"/>
+            <maps:Map Name="StartMap" Margin="0,0,0,153"/>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
