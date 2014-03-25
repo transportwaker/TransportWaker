@@ -158,4 +158,7 @@
   <data name="PivotSaved" xml:space="preserve">
     <value>Saved </value>
   </data>
+  <data name="CreateRoute" xml:space="preserve">
+    <value>Find Your Route</value>
+  </data>
 </root>

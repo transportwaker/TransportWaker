@@ -115,6 +115,15 @@ namespace TransportWaker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find Your Route.
+        /// </summary>
+        public static string CreateRoute {
+            get {
+                return ResourceManager.GetString("CreateRoute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recent.
         /// </summary>
         public static string PivotRecent {

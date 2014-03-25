@@ -72,5 +72,10 @@ namespace TransportWaker.View
         {
             NavigationService.Navigate(new Uri("/View/RouteHistory.xaml", UriKind.Relative));
         }
+
+        private void Tap_FindRouteStart(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/View/FindRouteStart.xaml", UriKind.Relative));
+        }
     }
 }
