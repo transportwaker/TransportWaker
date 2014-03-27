@@ -38,10 +38,34 @@ namespace PhoneApp
                 return "[{\"error\": \"No routes found\"}]";
             }
 
-            string json = "[ {\"tag\": \"" + routes[0].Attribute("tag").Value + "\", \"name\": \"" + routes[0].Attribute("title").Value + "\"}";
+            string json = "[{\"tag\": \"" + routes[0].Attribute("tag").Value + "\", \"name\": \"" + routes[0].Attribute("title").Value + "\"}";
             for (int i = 1; i < routes.Count; i++)
             {
                 json += ", {\"tag\": \"" + routes[i].Attribute("tag").Value + "\", \"name\": \"" + routes[i].Attribute("title").Value + "\"}";
+            }
+            json += "]";
+
+            Debug.WriteLine(json);
+            return json;
+        }
+
+        public async Task<string> GetRouteConfig(string route)
+        {
+            string data = await DownloadString("http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=" + agency + "&r=" + route);
+            XDocument root = XDocument.Parse(data);
+            List<XElement> stops = new List<XElement>();
+            stops.AddRange(root.Descendants("stop"));
+            stops.RemoveAll(stop => stop.Parent.Name != "route");
+
+            if (stops.Count == 0)
+            {
+                return "[{\"error\": \"No stops found for that route\"}]";
+            }
+
+            string json = "[{\"tag\": \"" + stops[0].Attribute("tag").Value + "\", \"name\": \"" + stops[0].Attribute("title").Value + "\", \"lat\": \"" + stops[0].Attribute("lat").Value + "\", \"lon\": \"" + stops[0].Attribute("lon").Value + "\"}";
+            for (int i = 1; i < stops.Count; i++)
+            {
+                json += ", {\"tag\": \"" + stops[i].Attribute("tag").Value + "\", \"name\": \"" + stops[i].Attribute("title").Value + "\", \"lat\": \"" + stops[i].Attribute("lat").Value + "\", \"lon\": \"" + stops[i].Attribute("lon").Value + "\"}";
             }
             json += "]";
 
