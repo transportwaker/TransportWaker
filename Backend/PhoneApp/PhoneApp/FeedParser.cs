@@ -22,7 +22,7 @@ namespace PhoneApp
         private static async Task<string> DownloadString(string url)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(new Uri("http://www.microsoft.com"));
+            HttpResponseMessage response = await client.GetAsync(new Uri(url));
             return await response.Content.ReadAsStringAsync();
         }
 
