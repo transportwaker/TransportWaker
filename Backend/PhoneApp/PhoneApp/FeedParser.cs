@@ -19,7 +19,7 @@ namespace PhoneApp
             this.agency = agency;
         }
 
-        private static async Task<string> DownloadString(string url)
+        public static async Task<string> DownloadString(string url)
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(new Uri(url));
