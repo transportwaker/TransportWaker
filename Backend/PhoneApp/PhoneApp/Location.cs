@@ -17,7 +17,7 @@ namespace PhoneApp
             this.Longitude = Longitude;
         }
 
-        public double getDistance(Location to)
+        public double GetDistance(Location to)
         {
             double dLat = (this.Latitude - to.Latitude) * Math.PI / 180;
             double dLon = (this.Longitude - to.Longitude) * Math.PI / 180;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace PhoneApp
 {
@@ -71,6 +72,22 @@ namespace PhoneApp
 
             Debug.WriteLine(json);
             return json;
+        }
+
+        public async Task<string> GetStopsInRadius(Location location, double radius)
+        {
+            string data = await GetRouteList();
+            JArray routes = JArray.Parse(data);
+            string response = "[";
+
+            for (int i = 0; i < routes.Count; i++)
+            {
+                JToken route = routes[i];
+                string tag = route["tag"].ToString();
+                Debug.WriteLine(tag);
+            }
+
+            return "";
         }
     }
 }
