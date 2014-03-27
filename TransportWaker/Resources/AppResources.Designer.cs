@@ -63,6 +63,15 @@ namespace TransportWaker.Resources {
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
+        public static string AboutPage {
+            get {
+                return ResourceManager.GetString("AboutPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
         public static string AppBarAbout {
             get {
                 return ResourceManager.GetString("AppBarAbout", resourceCulture);
@@ -102,6 +111,33 @@ namespace TransportWaker.Resources {
         public static string CreateAlarm {
             get {
                 return ResourceManager.GetString("CreateAlarm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find Your Route.
+        /// </summary>
+        public static string CreateRoute {
+            get {
+                return ResourceManager.GetString("CreateRoute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent.
+        /// </summary>
+        public static string PivotRecent {
+            get {
+                return ResourceManager.GetString("PivotRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saved .
+        /// </summary>
+        public static string PivotSaved {
+            get {
+                return ResourceManager.GetString("PivotSaved", resourceCulture);
             }
         }
         

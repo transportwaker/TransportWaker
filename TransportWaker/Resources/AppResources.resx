@@ -149,4 +149,16 @@
   <data name="Saved" xml:space="preserve">
     <value>Saved Routes</value>
   </data>
+  <data name="AboutPage" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="PivotRecent" xml:space="preserve">
+    <value>Recent</value>
+  </data>
+  <data name="PivotSaved" xml:space="preserve">
+    <value>Saved </value>
+  </data>
+  <data name="CreateRoute" xml:space="preserve">
+    <value>Find Your Route</value>
+  </data>
 </root>

@@ -8,14 +8,19 @@
     xmlns:UI="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
     x:Class="TransportWaker.View.MainPage"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush x:Name="HomePageBackGround" 
+                        ImageSource="/Assets/Backgrounds/HomeScreen.jpg" 
+                        Stretch="UniformToFill" />
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -33,8 +38,8 @@
         </StackPanel>
 
         <!--Content Navigator-->
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="24,0,0,0">
-            <TextBlock
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="24,0,24,0">
+            <TextBlock Tap="Tap_FindRouteStart"
                 HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				TextWrapping="Wrap"   

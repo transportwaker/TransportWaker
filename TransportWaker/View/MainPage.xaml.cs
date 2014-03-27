@@ -65,11 +65,17 @@ namespace TransportWaker.View
 
         private void aboutAppBar_Click(object sender, EventArgs e)
         {
+            NavigationService.Navigate(new Uri("/View/AboutPage.xaml", UriKind.Relative));
         }
 
         private void Tap_SavedRoute(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/SavedRoutes.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/View/RouteHistory.xaml", UriKind.Relative));
+        }
+
+        private void Tap_FindRouteStart(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/View/FindRouteStart.xaml", UriKind.Relative));
         }
     }
 }
