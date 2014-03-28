@@ -82,12 +82,28 @@ namespace PhoneApp
 
             for (int i = 0; i < routes.Count; i++)
             {
-                JToken route = routes[i];
-                string tag = route["tag"].ToString();
-                Debug.WriteLine(tag);
-            }
+                string tag = routes[i]["tag"].ToString();
+                data = await GetRouteConfig(tag);
+                JArray stops = JArray.Parse(data);
 
-            return "";
+                for (int j = 0; j < stops.Count; j++)
+                {
+                    double lat = Double.Parse(stops[j]["lat"].ToString());
+                    double lon = Double.Parse(stops[j]["lon"].ToString());
+
+                    if (location.GetDistance(new Location(lat, lon)) <= radius)
+                    {
+                        if (response.Length > 1)
+                        {
+                            response += ", ";
+                        }
+                        response += stops[i].ToString();
+                    }
+                }
+            }
+            response += "]";
+
+            return response;
         }
     }
 }
