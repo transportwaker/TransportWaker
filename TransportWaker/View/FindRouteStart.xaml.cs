@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,16 +8,19 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Windows.Devices.Geolocation;
 using System.Device.Location;
-using Microsoft.Phone.Controls.Maps.Platform;
 using Microsoft.Phone.Maps.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Microsoft.Phone.Maps.Toolkit;
+using TransportWaker.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TransportWaker.View
 {
     public partial class FindRouteStart : PhoneApplicationPage
     {
+        
         public FindRouteStart()
         {
             InitializeComponent();
@@ -31,6 +33,23 @@ namespace TransportWaker.View
 
             GetUserLoc();
 
+            LoadStopPins();
+
+        }
+
+        public async void LoadStopPins()
+        {
+            //Change hardcoding of agent later on
+            FeedParser agent = new FeedParser("ttc");
+            string routeData = await agent.GetRouteList();
+            JArray routes = JArray.Parse(routeData);
+
+            for (int i = 0; i < routes.Count; i++)
+            {
+                JToken route = routes[i];
+                string tag = route["tag"].ToString();
+                
+            }
         }
 
         private async void GetUserLoc()

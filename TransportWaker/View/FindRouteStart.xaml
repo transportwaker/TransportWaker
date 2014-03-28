@@ -8,6 +8,7 @@
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="TransportWaker.View.FindRouteStart"
     DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -36,19 +37,39 @@
 
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel"
+        <StackPanel x:Name="ContentPanel"
 			Grid.Row="1">
             <maps:Map Name="StartMap" Margin="0,0,0,153"/>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+            
+    
+            
+            <Grid x:Name="RouteSelector">
+                <LongListSelector>
+                    Name="RouteListSelector"
+                    Lay
+                ItemsSource="{Binding}"
+                GridCellSize="105, 105"
+                EnforceIsSelectionEnabled="True"
+                SelectionChanged="PhotosForLockscreen_SelectionChanged">
+                    <toolkit:LongListMultiSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Image 
+                            Opacity="0"
+                            Source="{Binding Image320}"
+                            Stretch="UniformToFill"
+                            ImageOpened="Image_ImageOpened" />
+                        </DataTemplate>
+                    </toolkit:LongListMultiSelector.ItemTemplate>
+                </toolkit:LongListSelector>
+
+            </Grid>
+                  
 
 
 
 
 
-        </Grid>
+        </StackPanel>
     </Grid>
 
 </phone:PhoneApplicationPage>
