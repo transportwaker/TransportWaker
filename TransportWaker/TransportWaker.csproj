@@ -97,6 +97,8 @@
     <Compile Include="Model\FeedParser.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="Model\GetPinLocation.cs" />
+    <Compile Include="ViewModel\LocTags.cs" />
+    <Compile Include="ViewModel\LocViewModel.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>

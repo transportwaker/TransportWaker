@@ -15,6 +15,7 @@ using Microsoft.Phone.Maps.Toolkit;
 using TransportWaker.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TransportWaker.ViewModel;
 
 namespace TransportWaker.View
 {
@@ -33,24 +34,15 @@ namespace TransportWaker.View
 
             GetUserLoc();
 
-            LoadStopPins();
 
         }
 
-        public async void LoadStopPins()
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Change hardcoding of agent later on
-            FeedParser agent = new FeedParser("ttc");
-            string routeData = await agent.GetRouteList();
-            JArray routes = JArray.Parse(routeData);
+            base.OnNavigatedTo(e);
 
-            for (int i = 0; i < routes.Count; i++)
-            {
-                JToken route = routes[i];
-                string tag = route["tag"].ToString();
-                
-            }
         }
+
 
         private async void GetUserLoc()
         {
@@ -106,6 +98,11 @@ namespace TransportWaker.View
         {
             SystemTray.ProgressIndicator.IsIndeterminate = isVisible;
             SystemTray.ProgressIndicator.IsVisible = isVisible;
+        }
+
+        private void RouteListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
     }

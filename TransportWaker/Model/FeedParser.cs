@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using TransportWaker.ViewModel;
+using System.IO.IsolatedStorage;
+using System.IO;
 
 namespace TransportWaker.Model
 {
-    class FeedParser
+    public class FeedParser
     {
         private string agency;
+        public const string routeDataFile = "RouteList.txt";
+        public string dataRoutes;
 
         public FeedParser(string agency)
         {
@@ -72,5 +78,72 @@ namespace TransportWaker.Model
             Debug.WriteLine(json);
             return json;
         }
+
+
+
+
+
+
+        //To work on later
+        //public static async Task SaveRoutes()
+        //{
+        //    using (var storageFolder = IsolatedStorageFile.GetUserStoreForApplication())
+        //    {
+        //        using (var stream = storageFolder.CreateFile(routeDataFile))
+        //        {
+        //            using (StreamWriter writer = new StreamWriter(stream))
+        //            {
+        //                FeedParser agent = new FeedParser("ttc");
+        //                string data = await agent.GetRouteList();
+
+        //                writer.Write(data);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //public async static void GetSavedRoutes()
+        //{
+
+
+        //    using (IsolatedStorageFile storageFolder = IsolatedStorageFile.GetUserStoreForApplication())
+        //    {
+        //        if (!storageFolder.FileExists(routeDataFile))
+        //            SaveRoutes();
+
+        //        using (IsolatedStorageFileStream stream = storageFolder.OpenFile(routeDataFile, FileMode.Open))
+        //        {
+        //            using (StreamReader reader = new StreamReader(stream))
+        //            {
+        //                string routesData = reader.ReadToEnd();
+        //            }
+        //        }
+        //    }
+
+        //    routesData = dataRoutes;
+        
+        //}
+
+
+        //        if (routesData != null)
+        //    {
+
+        //        LocViewModel data = new LocViewModel();
+
+        //        for (int i = 0; i < routesData.Count; i++)
+        //        {
+        //            JToken route = routesData[i];
+        //            data.Items.Add(new LocTags
+        //            {
+        //                Tag = route["tag"].ToString(),
+        //                Title = route["title"].ToString()
+        //            });
+
+        //        }
+
+        //public LocViewModel RouteList { get; set; }
+
+
+
     }
 }
