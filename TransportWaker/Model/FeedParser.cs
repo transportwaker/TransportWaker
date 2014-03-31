@@ -84,64 +84,28 @@ namespace TransportWaker.Model
 
 
 
-        //To work on later
-        //public static async Task SaveRoutes()
-        //{
-        //    using (var storageFolder = IsolatedStorageFile.GetUserStoreForApplication())
-        //    {
-        //        using (var stream = storageFolder.CreateFile(routeDataFile))
-        //        {
-        //            using (StreamWriter writer = new StreamWriter(stream))
-        //            {
-        //                FeedParser agent = new FeedParser("ttc");
-        //                string data = await agent.GetRouteList();
 
-        //                writer.Write(data);
-        //            }
-        //        }
-        //    }
-        //}
+        //To add error checks later on
 
-        //public async static void GetSavedRoutes()
-        //{
+        public static string GetSavedRoutes()
+        {
 
+            string rawData;
+            using (IsolatedStorageFile storageFolder = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                using (IsolatedStorageFileStream stream = storageFolder.OpenFile(routeDataFile, FileMode.Open))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        rawData = reader.ReadToEnd();
+                    }
+                }
+            }
 
-        //    using (IsolatedStorageFile storageFolder = IsolatedStorageFile.GetUserStoreForApplication())
-        //    {
-        //        if (!storageFolder.FileExists(routeDataFile))
-        //            SaveRoutes();
-
-        //        using (IsolatedStorageFileStream stream = storageFolder.OpenFile(routeDataFile, FileMode.Open))
-        //        {
-        //            using (StreamReader reader = new StreamReader(stream))
-        //            {
-        //                string routesData = reader.ReadToEnd();
-        //            }
-        //        }
-        //    }
-
-        //    routesData = dataRoutes;
-        
-        //}
+            return rawData;
+        }
 
 
-        //        if (routesData != null)
-        //    {
-
-        //        LocViewModel data = new LocViewModel();
-
-        //        for (int i = 0; i < routesData.Count; i++)
-        //        {
-        //            JToken route = routesData[i];
-        //            data.Items.Add(new LocTags
-        //            {
-        //                Tag = route["tag"].ToString(),
-        //                Title = route["title"].ToString()
-        //            });
-
-        //        }
-
-        //public LocViewModel RouteList { get; set; }
 
 
 

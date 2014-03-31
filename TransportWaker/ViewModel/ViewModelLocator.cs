@@ -59,6 +59,7 @@ namespace TransportWaker.ViewModel
 
             //Registered ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LocViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
 
         }
@@ -79,6 +80,16 @@ namespace TransportWaker.ViewModel
                 return ServiceLocator.Current.GetInstance<AboutViewModel>();
             }
         }
+
+
+        public LocViewModel LocViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LocViewModel>();
+            }
+        }
+
         
         public static void Cleanup()
         {

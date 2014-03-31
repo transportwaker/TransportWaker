@@ -9,7 +9,7 @@
     xmlns:Controls="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="TransportWaker.View.FindRouteStart"
-    DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+    DataContext="{Binding LocViewModel, Source={StaticResource Locator}}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -19,6 +19,15 @@
     <!--:toolkit="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"-->
 
     <!--LayoutRoot is the root grid where all page content is placed-->
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="RouteLists">
+            <StackPanel Background="{StaticResource PhoneAccentBrush}">
+                <TextBlock Text="{Binding Title}" />
+            </StackPanel>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -50,8 +59,12 @@
                 
                 <phone:LongListSelector
                     Name="RouteListSelector"
-                    ItemsSource="{Binding Title}"
-                    SelectionChanged="RouteListSelector_SelectionChanged">
+                    ItemsSource="{Binding RouteList.Title}"
+                    SelectionChanged="RouteListSelector_SelectionChanged"
+                    LayoutMode="List"
+                    ItemTemplate="{StaticResource RouteLists}">
+                    
+ 
                 </phone:LongListSelector>
 
             </StackPanel>

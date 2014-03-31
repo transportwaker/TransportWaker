@@ -14,5 +14,8 @@ namespace TransportWaker.ViewModel
         }
 
         public List<LocTags> Items { get; set; }
+
+
+
     }
 }

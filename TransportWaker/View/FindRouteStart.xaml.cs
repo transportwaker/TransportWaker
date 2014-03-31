@@ -16,6 +16,7 @@ using TransportWaker.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TransportWaker.ViewModel;
+using TransportWaker.Model;
 
 namespace TransportWaker.View
 {
@@ -27,6 +28,7 @@ namespace TransportWaker.View
             InitializeComponent();
             Loaded += MainPage_Loaded;
         }
+
 
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,8 +42,35 @@ namespace TransportWaker.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
+            RouteList = setRoutes();
         }
+
+        public LocViewModel setRoutes()
+        {
+            JArray routesData = JArray.Parse(FeedParser.GetSavedRoutes());
+
+            LocViewModel data = new LocViewModel();
+
+            if (routesData != null)
+            {
+                for (int i = 0; i < routesData.Count; i++)
+                {
+                    JToken route = routesData[i];
+                    data.Items.Add(new LocTags
+                    {
+                        Tag = route["tag"].ToString(),
+                        Title = route["name"].ToString()
+                    });
+                }
+            }
+
+        
+            return data;
+        }
+
+
+
+        public LocViewModel RouteList { get; set; }
 
 
         private async void GetUserLoc()

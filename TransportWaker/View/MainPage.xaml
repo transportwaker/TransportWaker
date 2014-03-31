@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:UI="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
     x:Class="TransportWaker.View.MainPage"
     mc:Ignorable="d"
     DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
@@ -15,32 +16,84 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot">
-        <Grid.Background>
-            <ImageBrush x:Name="HomePageBackGround" 
-                        ImageSource="/Assets/Backgrounds/HomeScreen.jpg" 
-                        Stretch="UniformToFill" />
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+	<i:Interaction.Behaviors>
+		<ec:DataStateBehavior Value="True" TrueState="Loading" FalseState="Loaded" Binding="{Binding IsDataLoaded, Mode=OneWay}"/>
+	</i:Interaction.Behaviors>
+
+	<Grid x:Name="LayoutRoot">
+        
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="DataState">
+				<VisualStateGroup.Transitions>
+					<VisualTransition GeneratedDuration="0:0:1" To="Loaded">
+						<VisualTransition.GeneratedEasingFunction>
+							<CubicEase EasingMode="EaseInOut"/>
+						</VisualTransition.GeneratedEasingFunction>
+					</VisualTransition>
+				</VisualStateGroup.Transitions>
+				<VisualState x:Name="Loading">
+					<Storyboard> 
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ContentPanel">
+							<DiscreteObjectKeyFrame KeyTime="0">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Collapsed</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="stackPanel">
+							<DiscreteObjectKeyFrame KeyTime="0">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Collapsed</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel" d:IsOptimized="True"/>
+						<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentPanel" d:IsOptimized="True"/>
+					</Storyboard>
+				</VisualState>
+				<VisualState x:Name="Loaded">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="stackPanel1">
+							<DiscreteObjectKeyFrame KeyTime="0">
+								<DiscreteObjectKeyFrame.Value>
+									<Visibility>Collapsed</Visibility>
+								</DiscreteObjectKeyFrame.Value>
+							</DiscreteObjectKeyFrame>
+						</ObjectAnimationUsingKeyFrames>
+						<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel1" d:IsOptimized="True"/>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+        
+        
+        
+        
+		<Grid.Background>
+			<ImageBrush x:Name="HomePageBackGround" 
+				ImageSource="/Assets/Backgrounds/HomeScreen.jpg" 
+				Stretch="UniformToFill" />
+		</Grid.Background>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
 
-        <!-- Header -->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"                 
+		<!-- Header -->
+		<StackPanel x:Name="stackPanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock Text="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"                 
 				Style="{StaticResource PhoneTextNormalStyle}"/>
 
-            <TextBlock Text="{Binding LocalizedResources.StartPage, Source={StaticResource LocalizedStrings}}"
+			<TextBlock Text="{Binding LocalizedResources.StartPage, Source={StaticResource LocalizedStrings}}"
 				Margin="9,-7,0,0" 
 				Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+		</StackPanel>
 
         <!--Content Navigator-->
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="24,0,24,0">
-            <TextBlock Tap="Tap_FindRouteStart"
-                HorizontalAlignment="Left"
+		<StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="24,0,24,0">
+			<TextBlock Tap="Tap_FindRouteStart"
+				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				TextWrapping="Wrap"   
 				Height="100"
@@ -49,8 +102,8 @@
 				Style="{StaticResource PhoneTextExtraLargeStyle}" 
 				Margin="0,0,0,0"/>
 
-            <TextBlock Tap="Tap_SavedRoute"
-                HorizontalAlignment="Left"
+			<TextBlock Tap="Tap_SavedRoute"
+				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				TextWrapping="Wrap"   
 				Height="100"
@@ -58,9 +111,12 @@
 				Text ="{Binding LocalizedResources.Saved, Source={StaticResource LocalizedStrings}}"
 				Style="{StaticResource PhoneTextExtraLargeStyle}" 
 				Margin="0,0,0,0"/>
-        </StackPanel>
+		</StackPanel>
+		<StackPanel x:Name="stackPanel1" Background="#FF3493BF" Grid.RowSpan="2">
+			<ProgressBar Height="554"/>
+		</StackPanel>
 
 
-    </Grid>
+	</Grid>
 
 </phone:PhoneApplicationPage>
